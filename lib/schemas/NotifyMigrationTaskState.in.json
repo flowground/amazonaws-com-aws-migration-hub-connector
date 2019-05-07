@@ -1,0 +1,112 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "DryRun": {
+                    "description": "Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.",
+                    "type": "boolean"
+                },
+                "MigrationTaskName": {
+                    "description": "Unique identifier that references the migration task.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[^:|]+",
+                    "type": "string"
+                },
+                "NextUpdateSeconds": {
+                    "description": "Number of seconds after the UpdateDateTime within which the Migration Hub can expect an update. If Migration Hub does not receive an update within the specified interval, then the migration task will be considered stale.",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "ProgressUpdateStream": {
+                    "description": "The name of the ProgressUpdateStream. ",
+                    "maxLength": 50,
+                    "minLength": 1,
+                    "pattern": "[^/:|\\000-\\037]+",
+                    "type": "string"
+                },
+                "Task": {
+                    "description": "Information about the task's progress and status.",
+                    "properties": {
+                        "ProgressPercent": {
+                            "description": "Indication of the percentage completion of the task.",
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "Status": {
+                            "description": "Status of the task - Not Started, In-Progress, Complete.",
+                            "enum": [
+                                "NOT_STARTED",
+                                "IN_PROGRESS",
+                                "FAILED",
+                                "COMPLETED"
+                            ],
+                            "type": "string"
+                        },
+                        "StatusDetail": {
+                            "description": "Details of task status as notified by a migration tool. A tool might use this field to provide clarifying information about the status that is unique to that tool or that explains an error state.",
+                            "maxLength": 500,
+                            "minLength": 0,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "Status"
+                    ],
+                    "type": "object"
+                },
+                "UpdateDateTime": {
+                    "description": "The timestamp when the task was gathered.",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ProgressUpdateStream",
+                "MigrationTaskName",
+                "Task",
+                "UpdateDateTime",
+                "NextUpdateSeconds"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

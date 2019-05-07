@@ -1,0 +1,74 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "MaxResults": {
+                    "description": "Maximum number of results to be returned per page.",
+                    "maximum": 10,
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "MigrationTaskName": {
+                    "description": "Unique identifier that references the migration task.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[^:|]+",
+                    "type": "string"
+                },
+                "NextToken": {
+                    "description": "If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.",
+                    "type": "string"
+                },
+                "ProgressUpdateStream": {
+                    "description": "The name of the ProgressUpdateStream. ",
+                    "maxLength": 50,
+                    "minLength": 1,
+                    "pattern": "[^/:|\\000-\\037]+",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ProgressUpdateStream",
+                "MigrationTaskName"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
